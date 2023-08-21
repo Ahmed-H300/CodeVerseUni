@@ -1,0 +1,4 @@
+mysql commands:
+----------------
+CREATE USER codeverse@localhost IDENTIFIED BY 'codeverse';
+GRANT ALL PRIVILEGES ON codeverseuni.* TO codeverse@localhost;
