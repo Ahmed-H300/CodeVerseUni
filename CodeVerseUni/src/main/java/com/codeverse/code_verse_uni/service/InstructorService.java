@@ -1,16 +1,16 @@
 package com.codeverse.code_verse_uni.service;
 
 import com.codeverse.code_verse_uni.entity.Instructor;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface InstructorService {
     public Instructor save(Instructor instructor);
 
     public Instructor findById(int id);
 
-    public List<Instructor> findAll();
+    public Page<Instructor> findAll(Pageable pageable);
 
     public Instructor findByIdAllDetails(int id);
 

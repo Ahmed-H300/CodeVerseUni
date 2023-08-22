@@ -1,15 +1,16 @@
 package com.codeverse.code_verse_uni.service;
 
 import com.codeverse.code_verse_uni.entity.Review;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface ReviewService {
     public Review save(Review review);
 
     public Review findById(int id);
 
-    public List<Review> findAll();
+    public Page<Review> findAll(Pageable pageable);
 
     public boolean doesExist(int id);
 

@@ -1,8 +1,9 @@
 package com.codeverse.code_verse_uni.service;
 
 import com.codeverse.code_verse_uni.entity.Student;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface StudentService {
 
@@ -10,7 +11,7 @@ public interface StudentService {
 
     public Student findById(int id);
 
-    public List<Student> findAll();
+    public Page<Student> findAll(Pageable pageable);
 
     public Student findByIdWithCourses(int id);
 

@@ -3,7 +3,6 @@ package com.codeverse.code_verse_uni.service;
 import com.codeverse.code_verse_uni.entity.Course;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
