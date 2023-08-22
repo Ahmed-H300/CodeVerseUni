@@ -1,4 +1,4 @@
-package com.codeverse.CodeVerseUni;
+package com.codeverse.code_verse_uni;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
