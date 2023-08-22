@@ -13,6 +13,6 @@ public class EntityErrorResponse {
 
     private String status;
     private String message;
-    private long timeStamp;
+    private String timeStamp;
 
 }

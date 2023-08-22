@@ -6,19 +6,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @ControllerAdvice
 public class EntityRestExceptionHandler {
 
-    @ExceptionHandler
-    public ResponseEntity<EntityErrorResponse> handleException(EntityNotFoundException exc) {
+    @ExceptionHandler({EntityNotFoundException.class, NoHandlerFoundException.class})
+    public ResponseEntity<EntityErrorResponse> handleExceptions(Exception exc) {
 
-        // create a StudentErrorResponse
+        // Create an EntityErrorResponse
         EntityErrorResponse error = new EntityErrorResponse();
-
         error.setStatus("404");
         error.setMessage(exc.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
+
+        // Convert timestamp to a more human-readable format
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedTime = currentTime.format(formatter);
+        error.setTimeStamp(formattedTime);
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
@@ -31,7 +39,11 @@ public class EntityRestExceptionHandler {
 
             error.setStatus("400");
             error.setMessage(exc.getMessage());
-            error.setTimeStamp(System.currentTimeMillis());
+            // Convert timestamp to a more human-readable format
+            LocalDateTime currentTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedTime = currentTime.format(formatter);
+            error.setTimeStamp(formattedTime);
 
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }

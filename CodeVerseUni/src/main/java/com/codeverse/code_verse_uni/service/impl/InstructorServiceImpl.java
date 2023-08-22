@@ -1,6 +1,7 @@
 package com.codeverse.code_verse_uni.service.impl;
 
 import com.codeverse.code_verse_uni.dao.InstructorRepository;
+import com.codeverse.code_verse_uni.entity.Course;
 import com.codeverse.code_verse_uni.entity.Instructor;
 import com.codeverse.code_verse_uni.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
