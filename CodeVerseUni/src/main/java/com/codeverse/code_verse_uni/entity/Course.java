@@ -1,6 +1,9 @@
 package com.codeverse.code_verse_uni.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"instructor", "students", "reviews"})
 @EqualsAndHashCode
 public class Course {
 
@@ -28,6 +31,7 @@ public class Course {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "instructor_id")
+    @JsonIgnore
     private Instructor instructor;
 
     @OneToMany(mappedBy ="course", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
@@ -40,6 +44,7 @@ public class Course {
             joinColumns = @JoinColumn(name="course_id"),
             inverseJoinColumns = @JoinColumn(name="student_id")
     )
+    @JsonIgnore
     private List<Student> students;
 
     public Course(String title) {

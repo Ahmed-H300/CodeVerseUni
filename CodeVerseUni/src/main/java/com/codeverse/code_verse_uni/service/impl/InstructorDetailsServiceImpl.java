@@ -1,8 +1,10 @@
 package com.codeverse.code_verse_uni.service.impl;
 
 import com.codeverse.code_verse_uni.dao.InstructorDetailsRepository;
+import com.codeverse.code_verse_uni.entity.Instructor;
 import com.codeverse.code_verse_uni.entity.InstructorDetails;
 import com.codeverse.code_verse_uni.service.InstructorDetailsService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,7 @@ public class InstructorDetailsServiceImpl implements InstructorDetailsService {
     }
 
     @Override
+    @Transactional
     public InstructorDetails save(InstructorDetails instructorDetails) {
         return instructorDetailsRepository.save(instructorDetails);
     }
@@ -41,7 +44,17 @@ public class InstructorDetailsServiceImpl implements InstructorDetailsService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
-        instructorDetailsRepository.deleteById(id);
+
+        InstructorDetails instructorDetails = instructorDetailsRepository.findById(id).orElse(null);
+        if (instructorDetails == null){
+            return;
+        }
+        Instructor instructor = instructorDetails.getInstructor();
+        if (instructor != null){
+            instructor.setInstructorDetails(null);
+        }
+        instructorDetailsRepository.delete(instructorDetails);
     }
 }

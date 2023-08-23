@@ -6,6 +6,8 @@ import com.codeverse.code_verse_uni.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +42,22 @@ public class InstructorController {
         return instructor;
     }
 
+    // Add mapping for getInstructor
+    @GetMapping("/details/{instructorId}")
+        public Instructor findByIdAllDetails(@PathVariable("instructorId") int instructorId) {
+            Instructor instructor =  instructorService.findByIdAllDetails(instructorId);
+            if (instructor == null) {
+                throw new EntityNotFoundException("Instructor id not found - " + instructorId);
+            }
+
+            return instructor;
+        }
+
+    @GetMapping("/all")
+    public Page<Instructor> getAllInstructors(@PageableDefault(size = 10) Pageable pageable) {
+        return instructorService.findAll(pageable);
+    }
+
     @PostMapping("/")
     public Instructor addInstructor(@RequestBody Instructor instructor) {
 
@@ -53,7 +71,7 @@ public class InstructorController {
         return instructor;
     }
 
-    @PostMapping("/update")
+    @PutMapping("/")
     public Instructor updateInstructor(@RequestBody Instructor instructor) {
 
         instructorService.save(instructor);
@@ -61,15 +79,29 @@ public class InstructorController {
         return instructor;
     }
 
+    @DeleteMapping("/{instructorId}")
+    public ResponseEntity<String> deleteById(@PathVariable("instructorId") int instructorId) {
+
+        if (!instructorService.doesExist(instructorId)) {
+            throw new EntityNotFoundException("Instructor id not found - " + instructorId);
+        }
+        instructorService.deleteById(instructorId);
+        return ResponseEntity.ok().body("Deleted instructor id - " + instructorId);
+    }
+
+    @GetMapping("/exists/{instructorId}")
+    public ResponseEntity<Boolean> doesExist(@PathVariable("instructorId") int instructorId) {
+        return ResponseEntity.ok().body(instructorService.doesExist(instructorId));
+    }
+
+
+
+
+
+
     //////////////////////////////////////////////////////
 
-//    public Instructor save(Instructor instructor);
 
-//    public Instructor findById(int id);
-
-//    public Page<Instructor> findAll(Pageable pageable);
-
-//    public Instructor findByIdAllDetails(int id);
 
 //    public boolean doesExist(int id);
 

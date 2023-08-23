@@ -1,6 +1,8 @@
 package com.codeverse.code_verse_uni.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "instructor")
 @EqualsAndHashCode
 public class InstructorDetails {
 
@@ -24,6 +26,7 @@ public class InstructorDetails {
 
     @OneToOne(mappedBy = "instructorDetails", cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonIgnore
     private Instructor instructor;
 
     public InstructorDetails(int salary) {

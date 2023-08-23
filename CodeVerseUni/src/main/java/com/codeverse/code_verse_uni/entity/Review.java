@@ -1,6 +1,7 @@
 package com.codeverse.code_verse_uni.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "course")
 @EqualsAndHashCode
 public class Review {
 
@@ -25,6 +26,7 @@ public class Review {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "course_id")
+    @JsonIgnore
     private Course course;
 
     public Review(String comment) {

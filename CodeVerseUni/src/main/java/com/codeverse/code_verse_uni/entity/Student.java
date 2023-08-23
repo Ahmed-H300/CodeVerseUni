@@ -49,9 +49,7 @@ public class Student {
     public void addCourse(Course course) {
         if (courses == null) {
             courses = new ArrayList<>();
-
         }
-
         courses.add(course);
     }
 
