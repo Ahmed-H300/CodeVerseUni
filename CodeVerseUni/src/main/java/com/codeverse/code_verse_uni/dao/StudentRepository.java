@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     // Find student and Courses with student id
-    @Query("select s from Student s join fetch s.courses where s.id = :id")
+    @Query("select s from Student s left join fetch s.courses where s.id = :id")
     Student findByIdWithCourses(@Param("id") int id);
 
     // Find All Students for specific Course id

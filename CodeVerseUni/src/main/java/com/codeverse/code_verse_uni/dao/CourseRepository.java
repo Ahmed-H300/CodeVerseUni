@@ -12,7 +12,7 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     // Find Course and reviews by course id
-    @Query("select c from Course c join fetch c.reviews where c.id = :id")
+    @Query("select c from Course c left join fetch c.reviews where c.id = :id")
     Page<Course> findByIdWithReviews(@Param("id") int id, Pageable pageable);
 
 }

@@ -84,4 +84,15 @@ public class CourseServiceImpl implements CourseService {
     public void deleteById(int id) {
         courseRepository.deleteById(id);
     }
+
+    @Override
+    public Instructor findInstructorById(int id) {
+        Course course = courseRepository.findById(id).orElse(null);
+        if (course == null){
+            return null;
+        }
+        Instructor instructor = course.getInstructor();
+        instructor.setCourses(null);
+        return instructor;
+    }
 }

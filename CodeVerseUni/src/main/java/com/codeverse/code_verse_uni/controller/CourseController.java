@@ -3,6 +3,7 @@ package com.codeverse.code_verse_uni.controller;
 
 import com.codeverse.code_verse_uni.dto.CourseDTO;
 import com.codeverse.code_verse_uni.entity.Course;
+import com.codeverse.code_verse_uni.entity.Instructor;
 import com.codeverse.code_verse_uni.exception.EntityNotFoundException;
 import com.codeverse.code_verse_uni.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,9 @@ public class CourseController {
     public Page<Course> findByIdWithReviews(@PathVariable("courseId") int courseId,
                                                            @PageableDefault(size = 10) Pageable pageable) {
         return courseService.findByIdWithReviews(courseId, pageable);
+    }
+    @GetMapping("/instructor/{courseId}")
+    public Instructor findInstructorById(@PathVariable("courseId") int courseId) {
+        return courseService.findInstructorById(courseId);
     }
 }
