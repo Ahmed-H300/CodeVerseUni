@@ -9,6 +9,7 @@ public interface InstructorRepository extends JpaRepository<Instructor, Integer>
 
 
     // Find instructor by id with courses
-    @Query("select i from Instructor i join fetch i.courses join FETCH i.instructorDetails where i.id = :id")
+    @Query("select i from Instructor i join fetch i.instructorDetails left join fetch i.courses where i.id = :id")
     Instructor findByIdAllDetails(@Param("id") int id);
+
 }
