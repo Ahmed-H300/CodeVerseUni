@@ -50,4 +50,18 @@ CREATE TABLE `course_student`(
 	CONSTRAINT `course_student_student_fk` FOREIGN KEY(`student_id`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE `_user`(    
+    `id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `first_name` VARCHAR(255),
+    `last_name` VARCHAR(255),
+    `password` VARCHAR(255),
+    `email` VARCHAR(255),
+    `role` ENUM('USER', 'ADMIN') NOT NULL,
+    `enabled` BOOLEAN DEFAULT TRUE,
+    `account_non_expired` BOOLEAN DEFAULT TRUE,
+    `account_non_locked` BOOLEAN DEFAULT TRUE,
+    `credentials_non_expired` BOOLEAN DEFAULT TRUE,
+    UNIQUE KEY `email_unique` (`email`)
+);
+
 SET FOREIGN_KEY_CHECKS = 1;

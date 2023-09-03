@@ -1,4 +1,4 @@
-package com.codeverse.code_verse_uni.controller;
+package com.codeverse.code_verse_uni.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
