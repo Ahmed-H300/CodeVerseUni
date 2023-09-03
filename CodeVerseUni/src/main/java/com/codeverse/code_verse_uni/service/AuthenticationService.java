@@ -8,4 +8,8 @@ public interface AuthenticationService {
     AuthenticationResponse register(RegisterRequest request);
 
     AuthenticationResponse authenticate(AuthenticateRequest request);
+
+    AuthenticationResponse registerManager(RegisterRequest request);
+
+    AuthenticationResponse registerAdmin(RegisterRequest request);
 }
